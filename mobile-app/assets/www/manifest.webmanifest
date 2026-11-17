@@ -1,0 +1,19 @@
+{
+  "name": "SysRush — Курс Linux, Сетей и LPIC-1",
+  "short_name": "SysRush",
+  "description": "Интерактивная платформа подготовки к Linux, Hardware, Networking и LPIC-1 с облачной синхронизацией и AI-напарником.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#181A1B",
+  "theme_color": "#213146",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

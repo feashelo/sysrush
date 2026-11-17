@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="darkreader-lock" />
+  <meta name="theme-color" content="#213146" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="icon" type="image/svg+xml" href="icon.svg" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <title>SysRush — Курс Linux, Железа, Сетей и LPIC-1</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="jr-app-shell" id="jrAppShell">
+    <!-- DESKTOP FULL-WIDTH TOP HEADER (Authentic JavaRush Layout) -->
+    <header class="jr-topbar">
+      <div class="jr-topbar-brand" onclick="App.nav('map')">
+        <svg class="jr-hex-logo" width="30" height="30" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+          <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" fill="#FF6B1A"/>
+          <path d="M14.5 12C12.8 12 12 12.9 12 14.4V16.2C12 17.2 11.4 17.8 10.3 18C11.4 18.2 12 18.8 12 19.8V21.6C12 23.1 12.8 24 14.5 24" stroke="#FFFFFF" stroke-width="2.3" stroke-linecap="round"/>
+          <path d="M21.5 12C23.2 12 24 12.9 24 14.4V16.2C24 17.2 24.6 17.8 25.7 18C24.6 18.2 24 18.8 24 19.8V21.6C24 23.1 23.2 24 21.5 24" stroke="#FFFFFF" stroke-width="2.3" stroke-linecap="round"/>
+        </svg>
+        <div class="jr-wordmark"><span>SYS</span>RUSH</div>
+      </div>
+
+      <div class="jr-topbar-main">
+        <div class="jr-topbar-section-title" id="topPageTitle">Лекции</div>
+
+        <div class="jr-topbar-search">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+            <circle cx="11" cy="11" r="7"/><path d="M20 20L16.5 16.5"/>
+          </svg>
+          <input
+            type="text"
+            id="topGlobalSearchIn"
+            placeholder="Поиск"
+            oninput="App.onGlobalSearch(this.value)"
+            onkeydown="if(event.key==='Enter'){App.submitGlobalSearch();}"
+          />
+        </div>
+
+        <div class="jr-topbar-right">
+          <div class="jr-top-user" onclick="App.openSettings()" title="Профиль и синхронизация прогресса">
+            <div class="jr-top-ava">
+              <svg width="34" height="34" viewBox="0 0 40 40" fill="none">
+                <circle cx="20" cy="20" r="20" fill="#2A374B"/>
+                <circle cx="20" cy="15" r="6.5" fill="#94A3B8"/>
+                <path d="M8.5 34C10.5 27.8 14.8 25 20 25C25.2 25 29.5 27.8 31.5 34" fill="#94A3B8"/>
+              </svg>
+            </div>
+            <div class="jr-top-user-info">
+              <div class="jr-top-user-line">
+                <strong class="jr-top-username">katletka</strong>
+                <span class="jr-top-lvl" id="topUserLvl">2 уровень</span>
+              </div>
+              <div class="jr-top-currencies">
+                <span class="jr-cur-item gold" title="Решено практических задач">
+                  <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="8.5" fill="#F59E0B" stroke="#FDE68A" stroke-width="1.4"/>
+                    <path d="M10 5.5L11.4 8.4L14.5 8.8L12.2 11L12.8 14.1L10 12.6L7.2 14.1L7.8 11L5.5 8.8L8.6 8.4L10 5.5Z" fill="#FFFBEB"/>
+                  </svg>
+                  <span>×<b id="sbSolved">0</b></span>
+                </span>
+                <span class="jr-cur-item matter" title="Чёрная материя (открывает уровни и лекции)">
+                  <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
+                    <defs>
+                      <radialGradient id="topOrbG" cx="35%" cy="30%" r="70%">
+                        <stop offset="0%" stop-color="#93C5FD"/>
+                        <stop offset="50%" stop-color="#2563EB"/>
+                        <stop offset="100%" stop-color="#1E1B4B"/>
+                      </radialGradient>
+                    </defs>
+                    <circle cx="10" cy="10" r="8.5" fill="url(#topOrbG)" stroke="#60A5FA" stroke-width="1.2"/>
+                    <circle cx="7.2" cy="7.2" r="1.2" fill="#FFFFFF"/>
+                    <circle cx="12.8" cy="11.5" r="0.9" fill="#BAE6FD"/>
+                  </svg>
+                  <span>×<b id="sbMatter">25</b></span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <button class="jr-sync-status-pill" id="sbSyncPill" onclick="App.openSettings()" title="Живая синхронизация Ноутбук ↔ Телефон">
+            <span class="sync-dot syncing" id="sbSyncDot"></span>
+            <span id="sbSyncText">СИНХРОНИЗАЦИЯ</span>
+          </button>
+
+          <button class="jr-top-icon-btn" onclick="App.openAiDrawer()" title="Спросить ИИ-Напарника">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z"/>
+              <path d="M19 16l.9 2.1L22 19l-2.1.9L19 22l-.9-2.1L16 19l2.1-.9L19 16z"/>
+            </svg>
+          </button>
+
+          <button class="jr-top-icon-btn" onclick="App.openSettings()" title="Настройки, синхронизация и бэкап">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+          </button>
+
+          <button class="jr-theme-switch" id="themeSwitchBtn" onclick="App.toggleTheme()" title="Переключить тему оформления">
+            <span class="ts-moon">☾</span>
+            <span class="ts-knob"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Hidden state bindings for backward compatibility -->
+      <div class="hidden" aria-hidden="true">
+        <span id="sbRank"></span>
+        <div id="sbXpBar"></div>
+        <span id="sbStreak">1</span>
+      </div>
+    </header>
+
+    <div class="jr-body-row">
+      <!-- DESKTOP LEFT SIDEBAR (Clean JavaRush Sections & Vector Icons) -->
+      <aside class="jr-sidebar" id="jrSidebar">
+        <div class="jr-sidebar-scroll">
+          <button class="jr-nav-featured" onclick="App.openAiDrawer()">
+            <span class="jr-green-glow-dot"></span>
+            <span class="jr-nav-lbl">AI Academy</span>
+            <span class="jr-badge-new">API</span>
+          </button>
+
+          <div class="jr-nav-divider"></div>
+          <div class="jr-nav-group-lbl">Обучение</div>
+
+          <button class="jr-nav-btn active" id="snav_map" onclick="App.nav('map')">
+            <svg class="jr-nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
+              <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+              <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+            </svg>
+            <span class="jr-nav-lbl">Курсы</span>
+          </button>
+
+          <button class="jr-nav-btn" id="snav_lecture" onclick="App.openCurrentLecture()">
+            <svg class="jr-nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+            </svg>
+            <span class="jr-nav-lbl">Лекции</span>
+          </button>
+
+          <button class="jr-nav-btn" id="snav_tasks" onclick="App.nav('tasks')">
+            <svg class="jr-nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+            </svg>
+            <span class="jr-nav-lbl">Задачи</span>
+            <span class="nav-count" id="sbTasksCount">0</span>
+          </button>
+
+          <button class="jr-nav-btn" id="snav_roadmap" onclick="App.nav('roadmap')">
+            <svg class="jr-nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+            </svg>
+            <span class="jr-nav-lbl">Карта навыков</span>
+          </button>
+
+          <div class="jr-nav-divider"></div>
+          <div class="jr-nav-group-lbl">Тренировка</div>
+
+          <button class="jr-nav-btn" id="snav_review" onclick="App.nav('review')">
+            <svg class="jr-nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+            </svg>
+            <span class="jr-nav-lbl">Умное повторение</span>
+            <span class="nav-count orange" id="sbReviewCount">0</span>
+          </button>
+
+          <button class="jr-nav-btn" id="snav_dojo" onclick="App.nav('dojo')">
+            <svg class="jr-nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+            <span class="jr-nav-lbl">Полигон скиллов</span>
+          </button>
+
+          <button class="jr-nav-btn" id="snav_vocab" onclick="App.nav('vocab')">
+            <svg class="jr-nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+            <span class="jr-nav-lbl">Английский LPIC</span>
+            <span class="nav-count" id="sbVocabCount">0</span>
+          </button>
+
+          <button class="jr-nav-btn" id="snav_exam" onclick="App.nav('exam')">
+            <svg class="jr-nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>
+            </svg>
+            <span class="jr-nav-lbl">Университет LPIC</span>
+          </button>
+
+          <div class="jr-nav-divider"></div>
+          <div class="jr-nav-group-lbl">Мой аккаунт</div>
+
+          <button class="jr-nav-btn" onclick="App.openSettings()">
+            <svg class="jr-nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>
+              <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/>
+            </svg>
+            <span class="jr-nav-lbl">Синхронизация</span>
+          </button>
+
+          <button class="jr-nav-btn" onclick="App.openSettings()">
+            <svg class="jr-nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+            <span class="jr-nav-lbl">Настройки</span>
+          </button>
+        </div>
+
+        <div class="jr-sidebar-collapse-bar">
+          <button class="jr-collapse-btn" onclick="App.toggleSidebar()" title="Свернуть / развернуть меню">
+            <span id="sidebarCollapseChevron">‹</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- MAIN WORKSPACE -->
+      <div class="jr-main">
+        <!-- MOBILE TOP HEADER -->
+        <header class="jr-mobile-header">
+          <div class="jr-mob-brand" onclick="App.nav('map')">
+            <svg width="28" height="28" viewBox="0 0 36 36" fill="none">
+              <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" fill="#FF6B1A"/>
+              <path d="M14.5 12C12.8 12 12 12.9 12 14.4V16.2C12 17.2 11.4 17.8 10.3 18C11.4 18.2 12 18.8 12 19.8V21.6C12 23.1 12.8 24 14.5 24" stroke="#FFF" stroke-width="2.3" stroke-linecap="round"/>
+              <path d="M21.5 12C23.2 12 24 12.9 24 14.4V16.2C24 17.2 24.6 17.8 25.7 18C24.6 18.2 24 18.8 24 19.8V21.6C24 23.1 23.2 24 21.5 24" stroke="#FFF" stroke-width="2.3" stroke-linecap="round"/>
+            </svg>
+            <div>
+              <div class="jr-mob-title"><span>SYS</span>RUSH</div>
+              <div class="jr-mob-rank" id="mobRank">Ур. 1 • Стажёр</div>
+            </div>
+          </div>
+          <div class="jr-mob-right">
+            <button class="jr-sync-mob-btn" id="mobSyncBtn" onclick="App.openSettings()" title="Живая синхронизация">
+              <span class="sync-dot syncing" id="mobSyncDot"></span>
+              <span id="mobSyncLbl">Sync</span>
+            </button>
+            <button class="jr-ai-mob-btn" onclick="App.openAiDrawer()" title="AI Academy">✦</button>
+            <div class="jr-matter-pill compact" onclick="App.nav('vocab')" title="Чёрная материя">
+              <span class="matter-orb-dot"></span>
+              <span id="mobMatter">25</span>
+            </div>
+            <button class="jr-icon-btn" onclick="App.openSettings()" title="Настройки">⚙</button>
+          </div>
+        </header>
+
+        <!-- VIEW 1: QUEST MAP -->
+        <section class="jr-view active" id="view_map">
+          <div class="jr-container">
+            <div class="jr-subnav-strip">
+              <button class="jr-subnav-link active" onclick="App.nav('map')">Мое обучение</button>
+              <button class="jr-subnav-link" onclick="App.nav('roadmap')">Карта навыков</button>
+              <button class="jr-subnav-link" onclick="App.openCurrentLecture()">Лекции</button>
+              <button class="jr-subnav-link" onclick="App.nav('tasks')">Задачи</button>
+              <button class="jr-subnav-link" onclick="App.nav('review')">Повторение</button>
+              <button class="jr-subnav-link" onclick="App.nav('dojo')">Полигон</button>
+            </div>
+
+            <div id="restoreBannerSlot"></div>
+            <div class="jr-hero-banner" id="continueBanner"></div>
+
+            <div class="jr-map-head-row">
+              <div class="jr-section-title" style="margin:0;">4 Квеста • 24 Уровня • 170 Практических задач (Easy • Medium • Hard 120%)</div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <button class="jr-outline-nav-btn sm" onclick="App.nav('tasks')">Список всех задач</button>
+                <button class="jr-outline-nav-btn sm" onclick="App.nav('roadmap')">Дерево roadmap.sh →</button>
+              </div>
+            </div>
+            <div class="jr-quests-tabs" id="questTabs"></div>
+
+            <div class="jr-quest-header-card" id="questHeaderCard"></div>
+
+            <div class="jr-levels-trail" id="levelsTrail"></div>
+
+            <div class="jr-section-title" style="margin-top:32px;">Достижения курса</div>
+            <div class="jr-ach-strip" id="achStrip"></div>
+          </div>
+        </section>
+
+        <!-- VIEW 1B: INTERACTIVE ROADMAP.SH TREE -->
+        <section class="jr-view" id="view_roadmap">
+          <div class="jr-container">
+            <div class="jr-subnav-strip">
+              <button class="jr-subnav-link" onclick="App.nav('map')">Мое обучение</button>
+              <button class="jr-subnav-link active" onclick="App.nav('roadmap')">Карта навыков</button>
+              <button class="jr-subnav-link" onclick="App.openCurrentLecture()">Лекции</button>
+              <button class="jr-subnav-link" onclick="App.nav('tasks')">Задачи</button>
+              <button class="jr-subnav-link" onclick="App.nav('review')">Повторение</button>
+            </div>
+            <div class="jr-page-head">
+              <h1>Дерево компетенций Linux, Железа и Сетей (roadmap.sh)</h1>
+              <p>Полная карта навыков системного и сетевого инженера. Выбери любой открытый узел, чтобы перейти к лекции и практике.</p>
+            </div>
+            <div id="roadmapTreeBody"></div>
+          </div>
+        </section>
+
+        <!-- VIEW 2: LECTURE READER (Authentic JavaRush Editorial Layout) -->
+        <section class="jr-view" id="view_lecture">
+          <div class="jr-container lecture-container" id="lectureContent"></div>
+        </section>
+
+        <!-- VIEW 3: ALL TASKS LIST -->
+        <section class="jr-view" id="view_tasks">
+          <div class="jr-container">
+            <div class="jr-subnav-strip">
+              <button class="jr-subnav-link" onclick="App.nav('map')">Мое обучение</button>
+              <button class="jr-subnav-link" onclick="App.nav('roadmap')">Карта навыков</button>
+              <button class="jr-subnav-link" onclick="App.openCurrentLecture()">Лекции</button>
+              <button class="jr-subnav-link active" onclick="App.nav('tasks')">Задачи</button>
+              <button class="jr-subnav-link" onclick="App.nav('review')">Повторение</button>
+            </div>
+            <div class="jr-page-head">
+              <h1>Практические задачи (WebLab)</h1>
+              <p>Решай задачи в интерактивном Linux-терминале, инженерных стендах и тренажёрах LPIC-1, чтобы зарабатывать чёрную материю.</p>
+            </div>
+            <div class="jr-search-row">
+              <input type="text" class="jr-search-in" id="taskSearchIn" placeholder="Поиск задачи по теме или команде (chmod, raid, dns, cron, systemd)..." oninput="App.setTaskSearch(this.value)" />
+            </div>
+            <div class="jr-filter-bar" id="tasksFilterBar"></div>
+            <div class="jr-tasks-grid" id="allTasksList"></div>
+          </div>
+        </section>
+
+        <!-- VIEW 4: LPIC TECHNICAL ENGLISH TRAINER -->
+        <section class="jr-view" id="view_vocab">
+          <div class="jr-container">
+            <div class="jr-subnav-strip">
+              <button class="jr-subnav-link" onclick="App.nav('map')">Мое обучение</button>
+              <button class="jr-subnav-link" onclick="App.openCurrentLecture()">Лекции</button>
+              <button class="jr-subnav-link active" onclick="App.nav('vocab')">Английский LPIC</button>
+              <button class="jr-subnav-link" onclick="App.nav('exam')">Экзамен LPIC-1</button>
+            </div>
+            <div class="jr-page-head">
+              <h1>Технический английский для LPIC-1</h1>
+              <p>Учим реальные формулировки экзаменационных билетов, корни команд и терминов с голосовой озвучкой.</p>
+            </div>
+            <div id="vocabTrainerBox"></div>
+            <div class="jr-vocab-toolbar">
+              <div class="jr-section-title" style="margin:0;">Словарь открытых уровней</div>
+              <input type="text" class="jr-search-in sm" id="vocabSearchIn" placeholder="Найти термин..." oninput="App.setVocabSearch(this.value)" />
+            </div>
+            <div class="jr-vocab-grid" id="vocabCardsGrid"></div>
+          </div>
+        </section>
+
+        <!-- VIEW 5: LPIC-1 EXAM SIMULATOR + SUBNET CALCULATOR + CHEAT SHEETS -->
+        <section class="jr-view" id="view_exam">
+          <div class="jr-container">
+            <div class="jr-subnav-strip">
+              <button class="jr-subnav-link" onclick="App.nav('map')">Мое обучение</button>
+              <button class="jr-subnav-link" onclick="App.openCurrentLecture()">Лекции</button>
+              <button class="jr-subnav-link" onclick="App.nav('vocab')">Английский LPIC</button>
+              <button class="jr-subnav-link active" onclick="App.nav('exam')">Экзамен LPIC-1</button>
+            </div>
+            <div class="jr-page-head">
+              <h1>Университет LPIC-1: Экзамен, Калькулятор CIDR и Шпаргалки</h1>
+              <p>Пробная сертификация 101-500 и 102-500 в формате Pearson VUE, калькулятор масок подсетей и быстрые справочники сисадмина.</p>
+            </div>
+            <div class="jr-filter-bar" id="examHubTabs"></div>
+            <div id="examHubBody"></div>
+          </div>
+        </section>
+
+        <!-- VIEW 5B: SMART NON-RANDOM REVIEW -->
+        <section class="jr-view" id="view_review">
+          <div class="jr-container">
+            <div class="jr-subnav-strip">
+              <button class="jr-subnav-link" onclick="App.nav('map')">Мое обучение</button>
+              <button class="jr-subnav-link" onclick="App.openCurrentLecture()">Лекции</button>
+              <button class="jr-subnav-link active" onclick="App.nav('review')">Умное повторение</button>
+              <button class="jr-subnav-link" onclick="App.nav('dojo')">Полигон скиллов</button>
+            </div>
+            <div class="jr-page-head">
+              <h1>Умное повторение: Случайности не случайны</h1>
+              <p>Гибридный Радар Памяти: интервалы кривой забывания (<code>1 → 3 → 7 → 14 → 30 дней</code>) + повышенный приоритет задач и терминов, где были ошибки или подсказки.</p>
+            </div>
+            <div id="reviewHubBody"></div>
+          </div>
+        </section>
+
+        <!-- VIEW 5C: SKILL DOJO -->
+        <section class="jr-view" id="view_dojo">
+          <div class="jr-container">
+            <div class="jr-subnav-strip">
+              <button class="jr-subnav-link" onclick="App.nav('map')">Мое обучение</button>
+              <button class="jr-subnav-link" onclick="App.openCurrentLecture()">Лекции</button>
+              <button class="jr-subnav-link" onclick="App.nav('review')">Умное повторение</button>
+              <button class="jr-subnav-link active" onclick="App.nav('dojo')">Полигон скиллов</button>
+            </div>
+            <div class="jr-page-head">
+              <h1>Полигон скиллов: Прокачка до автоматизма</h1>
+              <p>Пять инженерных тренажёров с разбором «под капотом»: права <code>chmod/umask/SUID</code>, расчёт подсетей <code>CIDR</code>, потоки <code>0/1/2 + Cron</code>, флаги <code>Debian vs RHEL</code> и аварии в <code>03:00 AM</code>.</p>
+            </div>
+            <div id="dojoHubBody"></div>
+          </div>
+        </section>
+
+        <!-- VIEW 6: JAVARUSH WEBLAB IDE -->
+        <section class="jr-view ide-view" id="view_ide">
+          <div class="ide-toolbar">
+            <button class="ide-back-btn" onclick="App.exitIde()">‹ К лекции</button>
+            <div class="ide-task-title" id="ideTaskTitle">Задача</div>
+            <div class="ide-actions">
+              <button class="ide-btn reset" onclick="App.resetCurrentTask()" title="Сбросить стенд">↺ <span>Сброс</span></button>
+              <button class="ide-btn ai" onclick="App.openAiDrawer()" title="Помощь ИИ по задаче">✦ <span>AI Помощь</span></button>
+              <button class="ide-btn hint" onclick="App.showTaskHint()" title="Аварийная подсказка">? <span>Аварийная подсказка</span></button>
+              <button class="ide-btn verify" id="btnVerifyTask" onclick="App.verifyCurrentTask()" title="Ctrl+Enter">✓ Проверить</button>
+            </div>
+          </div>
+
+          <div class="ide-mob-tabs">
+            <button class="ide-mtab active" id="imtab_cond" onclick="App.switchIdeMobileTab('cond')">Условие</button>
+            <button class="ide-mtab" id="imtab_work" onclick="App.switchIdeMobileTab('work')">Лаборатория</button>
+            <button class="ide-mtab" id="imtab_res" onclick="App.switchIdeMobileTab('res')">Проверка <span id="ideResDot"></span></button>
+          </div>
+
+          <div class="ide-split">
+            <div class="ide-pane cond-pane active" id="idePaneCond">
+              <div id="ideConditionBody"></div>
+            </div>
+            <div class="ide-pane work-pane" id="idePaneWork">
+              <div id="ideWorkspaceBody" class="ide-work-inner"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- MOBILE BOTTOM NAVIGATION -->
+        <nav class="jr-mobile-nav" id="mobileBottomNav">
+          <button class="mnav-item active" id="mnav_map" onclick="App.nav('map')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
+            <span>Курсы</span>
+          </button>
+          <button class="mnav-item" id="mnav_lecture" onclick="App.openCurrentLecture()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            <span>Лекции</span>
+          </button>
+          <button class="mnav-item" id="mnav_review" onclick="App.nav('review')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg>
+            <span>Повтор</span>
+          </button>
+          <button class="mnav-item" id="mnav_dojo" onclick="App.nav('dojo')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <span>Полигон</span>
+          </button>
+          <button class="mnav-item" id="mnav_vocab" onclick="App.nav('vocab')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <span>Англ.</span>
+          </button>
+          <button class="mnav-item" id="mnav_exam" onclick="App.nav('exam')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            <span>Экзамен</span>
+          </button>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- Word Translation Popover (LPIC English X-Ray + Audio Speak!) -->
+  <div class="xray-popover hidden" id="xrayPopover" onclick="App.hideXray()">
+    <div class="xray-card" onclick="event.stopPropagation()">
+      <div class="xray-top-row">
+        <div class="xray-en" id="xrayEn">word</div>
+        <button class="speak-btn" id="xraySpeakBtn" onclick="App.speakCurrentXray()" title="Прослушать произношение">🔊 Озвучить</button>
+      </div>
+      <div class="xray-pron" id="xrayPron">[транскрипция]</div>
+      <div class="xray-ru" id="xrayRu">Перевод</div>
+      <div class="xray-assoc" id="xrayAssoc"></div>
+    </div>
+  </div>
+
+  <!-- AI Mentor Slide-Over Drawer -->
+  <div class="ai-backdrop hidden" id="aiBackdrop" onclick="if(event.target===this) App.closeAiDrawer()">
+    <aside class="ai-drawer" id="aiDrawer" onclick="event.stopPropagation()">
+      <div class="ai-drawer-head">
+        <div>
+          <div class="ai-drawer-title">✦ AI Academy <span>SysRush</span></div>
+          <div class="ai-drawer-ctx" id="aiContextBadge">Контекст: Общий курс LPIC-1</div>
+        </div>
+        <div class="ai-head-btns">
+          <button class="jr-icon-btn" onclick="App.clearAiChat()" title="Очистить диалог">↺</button>
+          <button class="jr-icon-btn" onclick="App.closeAiDrawer()" title="Закрыть">✕</button>
+        </div>
+      </div>
+
+      <div class="ai-engine-bar">
+        <span class="ai-engine-lbl">Модель:</span>
+        <select class="ai-engine-select" id="aiEngineSelect" onchange="App.setAiEngine(this.value)">
+          <option value="gemini">Gemini 2.5 Flash (Ноут + Телефон)</option>
+          <option value="agy">Antigravity CLI (Ноут / LAN)</option>
+        </select>
+      </div>
+
+      <div class="ai-quick-chips" id="aiQuickChips"></div>
+
+      <div class="ai-chat-list" id="aiChatList"></div>
+
+      <div class="ai-input-row">
+        <input
+          type="text"
+          class="ai-chat-input"
+          id="aiChatInput"
+          placeholder="Спроси по лекции, задаче, команде или английскому термину..."
+          onkeydown="if(event.key==='Enter'){event.preventDefault();App.sendAiMessage();}"
+        />
+        <button class="ai-send-btn" id="aiSendBtn" onclick="App.sendAiMessage()">➤</button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Universal Modal -->
+  <div class="jr-modal-backdrop hidden" id="modalBackdrop" onclick="if(event.target===this) App.closeModal()">
+    <div class="jr-modal">
+      <div class="jr-modal-head">
+        <strong id="modalTitle">Настройки</strong>
+        <button class="jr-icon-btn" onclick="App.closeModal()">✕</button>
+      </div>
+      <div class="jr-modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <div class="jr-toast hidden" id="toastEl"></div>
+
+  <script src="sync-config.js"></script>
+  <script src="curriculum-q1.js"></script>
+  <script src="curriculum-q2.js"></script>
+  <script src="curriculum-q3.js"></script>
+  <script src="curriculum-q4.js"></script>
+  <script src="curriculum-data.js"></script>
+  <script src="dojo-engine.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+# dmidecode 3.7
+Getting SMBIOS data from sysfs.
+SMBIOS 3.6.0 present.
+
+Handle 0x0003, DMI type 16, 23 bytes
+Physical Memory Array
+	Location: System Board Or Motherboard
+	Use: System Memory
+	Error Correction Type: None
+	Maximum Capacity: 64 GiB
+	Error Information Handle: Not Provided
+	Number Of Devices: 2
+
+Handle 0x0004, DMI type 17, 92 bytes
+Memory Device
+	Array Handle: 0x0003
+	Error Information Handle: Not Provided
+	Total Width: 64 bits
+	Data Width: 64 bits
+	Size: 16 GiB
+	Form Factor: SODIMM
+	Set: None
+	Locator: Controller0-ChannelA-DIMM0
+	Bank Locator: BANK 0
+	Type: DDR5
+	Type Detail: Synchronous
+	Speed: 5600 MT/s
+	Manufacturer: Samsung
+	Serial Number: 3200013B
+	Asset Tag: None
+	Part Number: M425R2GA3EB0-CWMOD  
+	Rank: 1
+	Configured Memory Speed: 5600 MT/s
+	Minimum Voltage: Unknown
+	Maximum Voltage: Unknown
+	Configured Voltage: 1.1 V
+	Memory Technology: DRAM
+	Memory Operating Mode Capability: Volatile memory
+	Firmware Version: Not Specified
+	Module Manufacturer ID: Bank 1, Hex 0xCE
+	Module Product ID: Unknown
+	Memory Subsystem Controller Manufacturer ID: Unknown
+	Memory Subsystem Controller Product ID: Unknown
+	Non-Volatile Size: None
+	Volatile Size: 16 GiB
+	Cache Size: None
+	Logical Size: None
+
+Handle 0x0005, DMI type 17, 92 bytes
+Memory Device
+	Array Handle: 0x0003
+	Error Information Handle: Not Provided
+	Total Width: Unknown
+	Data Width: Unknown
+	Size: No Module Installed
+	Form Factor: Unknown
+	Set: None
+	Locator: Controller1-ChannelA-DIMM0
+	Bank Locator: BANK 0
+	Type: Unknown
+	Type Detail: None
+
+	Type: DDR5
+	Size: 16 GiB
+	Non-Volatile Size: None
+	Volatile Size: 16 GiB
+	Cache Size: None
+	Logical Size: None
+	Size: No Module Installed

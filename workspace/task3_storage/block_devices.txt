@@ -1,0 +1,22 @@
+NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+zram0       253:0    0  15.1G  0 disk [SWAP]
+nvme0n1     259:0    0 476.9G  0 disk 
+├─nvme0n1p1 259:1    0   300M  0 part /boot/efi
+└─nvme0n1p2 259:2    0 476.6G  0 part /var/log
+                                      /var/tmp
+                                      /var/cache
+                                      /home
+                                      /root
+                                      /srv
+                                      /
+NAME        FSTYPE FSVER LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+zram0       swap   1     zram0 bfea1f72-a712-441d-a12f-36c43eab0b72                [SWAP]
+nvme0n1                                                                            
+├─nvme0n1p1 vfat   FAT32       A621-4ADD                             218.6M    27% /boot/efi
+└─nvme0n1p2 btrfs              4b4decc2-a210-44e6-81c0-fdc01b480510   90.5G    80% /var/log
+                                                                                   /var/tmp
+                                                                                   /var/cache
+                                                                                   /home
+                                                                                   /root
+                                                                                   /srv
+                                                                                   /

@@ -1,0 +1,5 @@
+mobile-app/build/
+mobile-app/debug.keystore
+*.apk
+__pycache__/
+*.pyc
